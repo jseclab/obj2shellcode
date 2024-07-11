@@ -119,7 +119,14 @@ namespace weaponslib2{
 	const char* obj::getSymbolNameByImageSymble(IMAGE_SYMBOL& symbol) {
 
 		if (symbol.N.Name.Short != 0)
-			return (reinterpret_cast<char*>(symbol.N.ShortName));
+		{
+			char name[9];
+			memcpy(name, symbol.N.ShortName, 8);
+			size_t length = strnlen(name, 8);
+			name[length] = '\0';
+			return _strdup(name);
+		}
+			
 		else {
 			if (!m_stringT) {
 				PIMAGE_FILE_HEADER    obj = reinterpret_cast<PIMAGE_FILE_HEADER>(m_buffer);

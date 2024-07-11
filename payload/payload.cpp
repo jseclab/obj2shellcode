@@ -83,6 +83,16 @@ const char* globalStr = "helloworld";
 const char* globalStr1 = "你好中国：》";
 int globalVar = 0x414141;
 
+SC_EXPORT_DATA(volatile unsigned int, CaptureWidth)
+SC_EXPORT_DATA(volatile unsigned int, CaptureHeight)
+#ifdef _WIN64
+SC_EXPORT_DATA(volatile unsigned int, Eight000)
+#else
+SC_EXPORT_DATA(volatile unsigned int, Seven00)
+#endif // _WIN64
+
+
+
 void printStatic()
 {
     static int sta = 0;
